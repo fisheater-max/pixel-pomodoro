@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Pomodoro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- CRT 扫描线 -->
+  <div class="crt-overlay"></div>
+
+  <!-- 标题栏 -->
+  <div class="title-bar" id="titleBar">
+    <span class="title-bar-text">PIXEL POMODORO v1.0</span>
+    <div class="title-bar-buttons">
+      <button class="title-btn" id="btnMinimize" title="最小化">─</button>
+      <button class="title-btn" id="btnClose" title="关闭到托盘">✕</button>
+    </div>
+  </div>
+
+  <!-- 主容器 -->
+  <div class="container">
+    <!-- 计时器区域 -->
+    <div class="timer-section">
+      <div class="session-label" id="sessionLabel">FOCUS</div>
+      <div class="timer-display" id="timerDisplay">
+        <canvas id="progressCanvas" width="200" height="200"></canvas>
+        <div class="timer-text" id="timerText">25:00</div>
+      </div>
+      <div class="session-counter" id="sessionCounter">ROUND 1 / 4</div>
+    </div>
+
+    <!-- 控制按钮 -->
+    <div class="controls">
+      <button class="btn pixel-btn btn-start" id="btnStart">▶ START</button>
+      <button class="btn pixel-btn btn-pause" id="btnPause" style="display:none;">⏸ PAUSE</button>
+      <button class="btn pixel-btn btn-reset" id="btnReset">↺ RESET</button>
+      <button class="btn pixel-btn btn-skip" id="btnSkip">⏭ SKIP</button>
+    </div>
+
+    <!-- 标签切换 -->
+    <div class="tabs">
+      <button class="tab active" data-tab="tasks">TASKS</button>
+      <button class="tab" data-tab="stats">STATS</button>
+      <button class="tab" data-tab="settings">SETTINGS</button>
+    </div>
+
+    <!-- 任务面板 -->
+    <div class="panel active" id="panelTasks">
+      <div class="task-input-row">
+        <input type="text" class="task-input pixel-input" id="taskInput" placeholder="ADD TASK..." maxlength="60">
+        <button class="btn pixel-btn btn-add" id="btnAddTask">+</button>
+      </div>
+      <div class="task-list" id="taskList">
+        <div class="task-empty">NO TASKS YET<br>PRESS + TO ADD</div>
+      </div>
+    </div>
+
+    <!-- 统计面板 -->
+    <div class="panel" id="panelStats">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-value" id="statToday">0</div>
+          <div class="stat-label">TODAY</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statWeek">0</div>
+          <div class="stat-label">THIS WEEK</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-label">TOTAL</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statMinutes">0m</div>
+          <div class="stat-label">FOCUS TIME</div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="chartCanvas" width="340" height="80"></canvas>
+      </div>
+    </div>
+
+    <!-- 设置面板 -->
+    <div class="panel" id="panelSettings">
+      <div class="setting-row">
+        <label>FOCUS (min)</label>
+        <input type="number" class="pixel-input setting-input" id="setFocus" min="1" max="60" value="25">
+      </div>
+      <div class="setting-row">
+        <label>SHORT BREAK (min)</label>
+        <input type="number" class="pixel-input setting-input" id="setShortBreak" min="1" max="30" value="5">
+      </div>
+      <div class="setting-row">
+        <label>LONG BREAK (min)</label>
+        <input type="number" class="pixel-input setting-input" id="setLongBreak" min="1" max="60" value="15">
+      </div>
+      <div class="setting-row">
+        <label>LONG BREAK AFTER</label>
+        <input type="number" class="pixel-input setting-input" id="setLongInterval" min="1" max="10" value="4">
+      </div>
+      <button class="btn pixel-btn btn-save" id="btnSaveSettings">SAVE SETTINGS</button>
+    </div>
+  </div>
+
+  <script src="sound.js"></script>
+  <script src="timer.js"></script>
+  <script src="tasks.js"></script>
+  <script src="stats.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
